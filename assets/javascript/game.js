@@ -21,20 +21,21 @@ var database = firebase.database();
 
 $("#submit-button").on("click", function (event) {
     event.preventDefault();
-    var trainName = $("#train-name-input").val().trim();
-    var trDestination = $("#destination-input").val().trim();
-    var trStart = $("#start-input").val().trim();
-    var trFreq = $("#freq-input").val().trim();
+    if ($("#train-name-input") && $("#destination-input") && $("#start-input") && $("#freq-input")) {
+        var trainName = $("#train-name-input").val().trim();
+        var trDestination = $("#destination-input").val().trim();
+        var trStart = $("#start-input").val().trim();
+        var trFreq = $("#freq-input").val().trim();
 
-    var newTrain = {
-        name: trainName,
-        dest: trDestination,
-        start: trStart,
-        freq: trFreq
-    };
+        var newTrain = {
+            name: trainName,
+            dest: trDestination,
+            start: trStart,
+            freq: trFreq
+        };
 
-    database.ref().push(newTrain)
-
+        database.ref().push(newTrain)
+    }
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#start-input").val("");

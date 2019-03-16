@@ -43,15 +43,15 @@ $("#submit-button").on("click", function (event) {
 });
 
 database.ref().on("child_added", function(childSnapshot) {
-    console.log(childSnapshot.val())
     var newRow = $("<tr>")
 
-
+    
     //TODO: Calculate these values
-    var nextArrivalVal = 0
-    var minsAwayVal = 0
+    //Make sure that the correct input is being taken
+    var firstTrainTime = (childSnapshot.val().start)
     
-    
+    var nextTrainTime = 
+    var timeAway //next train time minus current time
 
     //creates new table value for each new value to be added
     var newTrain = $("<td>")
@@ -66,25 +66,25 @@ database.ref().on("child_added", function(childSnapshot) {
     destination.text(childSnapshot.val().dest)
     freq.text(childSnapshot.val().freq)
 
-    arrival.text(nextArrivalVal)
-    minsAway.text(minsAwayVal)
+    arrival.text(nextTrainTime)
+    minsAway.text(timeAway)
 
     //appends each new item to the new row
     newRow.append(newTrain)
     newRow.append(destination)
     newRow.append(freq)
     newRow.append(arrival)
-    newRow.append(minsAway)
+    newRow.append(timeAway)
 
     //appends new row to table
     $("#tableBody").append(newRow);
 });
 
 //particle background generator
-window.onload = function () {
-    Particles.init({
-        selector:'.background',
-        connectParticles: true,
-        color: "#9df098"
-    });
-};
+// window.onload = function () {
+//     Particles.init({
+//         selector:'.background',
+//         connectParticles: true,
+//         color: "#9df098"
+//     });
+// };

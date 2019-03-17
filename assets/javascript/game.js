@@ -48,10 +48,10 @@ database.ref().on("child_added", function(childSnapshot) {
     
     //TODO: Calculate these values
     //Make sure that the correct input is being taken
-    var firstTrainTime = (childSnapshot.val().start)
+    var firstTrainTime = (childSnapshot.val().start, "HH:mm a")
     
-    var nextTrainTime = 
-    var timeAway //next train time minus current time
+    var nextTrainTime = moment(firstTrainTime).add(childSnapshot.val().freq, "minutes")
+    //var timeAway = moment(nextTrainTime).minus(moment().format("HH:mm a"))
 
     //creates new table value for each new value to be added
     var newTrain = $("<td>")
@@ -67,14 +67,14 @@ database.ref().on("child_added", function(childSnapshot) {
     freq.text(childSnapshot.val().freq)
 
     arrival.text(nextTrainTime)
-    minsAway.text(timeAway)
+    minsAway.text()
 
     //appends each new item to the new row
     newRow.append(newTrain)
     newRow.append(destination)
     newRow.append(freq)
     newRow.append(arrival)
-    newRow.append(timeAway)
+    newRow.append(minsAway)
 
     //appends new row to table
     $("#tableBody").append(newRow);
